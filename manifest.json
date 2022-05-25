@@ -1,0 +1,40 @@
+{
+  "name": "Verse reminder",
+  "description": "Reminds about events in calendar",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "alarms",
+    "notifications",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/verse*"
+      ],
+      "type": "module",
+      "js": [
+        "index.js"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "action": {
+    "default_icon": "icon16.png",
+    "default_popup": "index.html",
+    "default_title": "Verse reminder"
+  }
+}

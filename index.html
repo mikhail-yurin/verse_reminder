@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Verse Reminder</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 250px;
+      /* padding-left: 10px; */
+    }
+
+    #form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #target_url {
+      margin-bottom: 10px;
+      width: 240px;
+    }
+
+    #submit {
+      color: white;
+      background-color: grey;
+      padding: 4px 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div if="form">
+    <h4>Current calendar url:</h4>
+    <input type="text" name="" id="target_url">
+    <button id="submit">Save</button>
+  </div>
+  <script src="./store.js"></script>
+</body>
+
+</html>
