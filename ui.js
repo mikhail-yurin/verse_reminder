@@ -11,22 +11,15 @@ if (input) {
   });
 }
 
-chrome.alarms.getAll().then((alerts) => {
-  if (list) {
-    const uniqueAlerts = [
-      ...new Map(
-        alerts
-          .map((alert) => ({ ...alert, name: alert.name.replace(/\s?\[.*\].*/, '') }))
-          .map((item) => [item['name'], item])
-      ).values()];
-
-    uniqueAlerts.forEach(({ name, scheduledTime }) => {
+chrome.storage.sync.get(['verse_reminder_events']).then((result) => {
+  if (list && result['verse_reminder_events']) {
+    result['verse_reminder_events']?.forEach(({ subject, when }) => {
       const li = document.createElement('li');
-      li.innerText = `${name} ${new Date(scheduledTime)}`;
+      li.innerText = `${subject} ${new Date(when)}`;
       list.appendChild(li);
     });
   }
-}).catch((err) => { });
+});
 
 button.onclick = () => {
   chrome.storage.sync.set({ [storeKey]: input.value?.replace(/https?:\/\//, '') }, function () {

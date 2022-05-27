@@ -3,7 +3,9 @@ const remindBeforeMinutes = [0, 1, 10];
 
 chrome.runtime.onMessage.addListener(({ type, notifications = [] }) => {
   if (type === 'set-verse-alerts') {
-    notifications.push({ subject: 'from the past', when: Date.now() - 6000000 });
+    // save events to storage
+    chrome.storage.sync.set({ verse_reminder_events: notifications });
+
     notifications?.forEach((alert) => {
       remindBeforeMinutes.forEach((interval) => {
         const name = alert.subject + (interval > 0 ? ` [starts in ${interval} min]` : ' [starts now]');
@@ -15,9 +17,6 @@ chrome.runtime.onMessage.addListener(({ type, notifications = [] }) => {
     });
   }
 });
-
-// todo: save in storage?
-// chrome.storage.local.set({ name });
 
 chrome.alarms.onAlarm.addListener(({ name, scheduledTime }) => {
   chrome.notifications.create(
