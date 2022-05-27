@@ -25,6 +25,21 @@
       background-color: grey;
       padding: 4px 8px;
     }
+
+    #label {
+      margin-top: 20px;
+      margin-bottom: 4px;
+    }
+
+    #list {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+
+    li {
+      margin-top: 4px;
+    }
   </style>
 </head>
 
@@ -33,6 +48,8 @@
     <h4>Current calendar url:</h4>
     <input type="text" name="" id="target_url">
     <button id="submit">Save</button>
+    <div id="label">Today events:</div>
+    <ul id="list"></ul>
   </div>
   <script src="./store.js"></script>
 </body>
