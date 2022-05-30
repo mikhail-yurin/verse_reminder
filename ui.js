@@ -13,7 +13,7 @@ if (input) {
 
 chrome.storage.sync.get(['verse_reminder_events']).then((result) => {
   if (list && result['verse_reminder_events']) {
-    result['verse_reminder_events']?.forEach(({ subject, when }) => {
+    result['verse_reminder_events']?.reverse().forEach(({ subject, when }) => {
       const li = document.createElement('li');
       li.innerText = `${subject} ${new Date(when)}`;
       list.appendChild(li);
