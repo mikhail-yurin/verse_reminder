@@ -13,7 +13,7 @@ it gives you browser notifications about your meetings from the calendar for the
 - click the extension icon in Chrome
 - enter the url of the calendar page
 - click "Save"
-### this should be done every day (script parses calendsr page and schedule alerts for current day):
+### this should be done every day (script parses the calendar page and schedules alerts for the current day):
 - open your calendar
 - in case everything is working you will get an alert about created notifications
 
