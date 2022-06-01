@@ -1,4 +1,5 @@
 # Calendar events reminder
+it gives you browser notifications about your meetings from the calendar for the current day
 
 ## Installation
 - clone this repository
