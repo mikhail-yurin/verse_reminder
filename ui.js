@@ -15,7 +15,7 @@ chrome.storage.sync.get(['verse_reminder_events']).then((result) => {
   if (list && result['verse_reminder_events']) {
     result['verse_reminder_events']?.reverse().forEach(({ subject, when }) => {
       const li = document.createElement('li');
-      li.innerText = `${subject} ${new Date(when)}`;
+      li.innerText = `${subject} \n${new Date(when).toLocaleTimeString('ru-RU')}`.replace(/:\d{2}$/g, '');
       list.appendChild(li);
     });
   }
