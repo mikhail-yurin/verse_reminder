@@ -25,7 +25,7 @@ chrome.alarms.onAlarm.addListener(({ name, scheduledTime }) => {
       type: 'basic',
       iconUrl: icon,
       title: name,
-      message: new Date(scheduledTime).toString(),
+      message: new Date(scheduledTime).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, ''),
     },
     () => { },
   );
