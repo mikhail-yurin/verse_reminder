@@ -1,20 +1,28 @@
 const icon = './icon48.png';
-const remindBeforeMinutes = [0, 1, 10];
+const intervalsKey = 'verse_reminder_intervals';
 
 chrome.runtime.onMessage.addListener(({ type, notifications = [] }) => {
   if (type === 'set-verse-alerts') {
     // save events to storage
     chrome.storage.sync.set({ verse_reminder_events: notifications });
 
-    notifications?.forEach((alert) => {
-      remindBeforeMinutes.forEach((interval) => {
-        const name = JSON.stringify({title: alert.subject, time: alert.when, interval});
-        const when = alert.when - (interval * 60 * 1000);
-        if (Date.now() <= when) {
-          chrome.alarms.create(name, { when });
-        }
-      });
+    // get intervals
+    chrome.storage.sync.get([intervalsKey], function (result) {
+      if (result[intervalsKey]) {
+        const intervals = JSON.parse(result[intervalsKey]);
+
+        notifications?.forEach((alert) => {
+          intervals.forEach((interval) => {
+            const name = JSON.stringify({title: alert.subject, time: alert.when, interval});
+            const when = alert.when - (interval * 60 * 1000);
+            if (Date.now() <= when) {
+              chrome.alarms.create(name, { when });
+            }
+          });
+        });
+      }
     });
+
   }
 });
 
