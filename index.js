@@ -41,7 +41,7 @@ chrome.storage.sync.get([storeKey], function (result) {
       chrome.runtime.sendMessage({ type: 'set-verse-alerts', notifications }, () => {
         let msgEventList = '';
         notifications.reverse().forEach((alert) => {
-          msgEventList += `\n\n${alert.subject} at ${new Date(alert.when)}`
+          msgEventList += `\n\n- ${alert.subject} at ${new Date(alert.when).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')}`
         });
 
         log(`Scheduled ${notifications.length} events:${msgEventList}`);
