@@ -16,7 +16,11 @@ chrome.runtime.onMessage.addListener(({ type, notifications = [] }) => {
             const name = JSON.stringify({title: alert.subject, time: alert.when, interval});
             const when = alert.when - (interval * 60 * 1000);
             if (Date.now() <= when) {
+              // add alarm for upcoming event
               chrome.alarms.create(name, { when });
+            } else {
+              // remove alarm for past event
+              chrome.alarms.clear(name);
             }
           });
         });

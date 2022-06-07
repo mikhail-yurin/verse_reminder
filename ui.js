@@ -73,6 +73,9 @@ chrome.storage.sync.get(['verse_reminder_events']).then((result) => {
     result['verse_reminder_events']?.reverse().forEach(({ subject, when }) => {
       const li = document.createElement('li');
       li.innerText = `${subject} \n${new Date(when).toLocaleTimeString('ru-RU')}`.replace(/:\d{2}$/g, '');
+      if (Date.now() > when) {
+        li.className = 'past';
+      }
       list.appendChild(li);
     });
   }
