@@ -25,7 +25,7 @@ chrome.storage.sync.get([storeKey], function (result) {
     function scan4events(eventNodes = []) {
       const notifications = [];
       const today = new Date();
-      const upcomingCount = 0;
+      let upcomingCount = 0;
       eventNodes?.forEach((node) => {
         const time = $x('.//div[1]', node)[0];
         const subject = $x('.//div[2]', node)[0];
