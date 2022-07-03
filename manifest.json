@@ -1,28 +1,16 @@
 {
-  "name": "Verse reminder",
-  "description": "Reminds about events in calendar",
+  "name": "Owa calendar reminder",
+  "description": "Reminds about events in outlook web calendar",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": [
-    "activeTab",
-    "scripting",
     "alarms",
     "notifications",
-    "storage"
+    "storage",
+    "webRequest"
   ],
   "host_permissions": [
     "<all_urls>"
-  ],
-  "content_scripts": [
-    {
-      "matches": [
-        "https://*/verse*"
-      ],
-      "type": "module",
-      "js": [
-        "index.js"
-      ]
-    }
   ],
   "background": {
     "service_worker": "background.js"
@@ -35,6 +23,6 @@
   "action": {
     "default_icon": "icon16.png",
     "default_popup": "index.html",
-    "default_title": "Verse reminder"
+    "default_title": "Owa calendar reminder"
   }
 }

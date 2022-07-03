@@ -1,5 +1,6 @@
-const urlKey = 'verse_reminder_calendar_url';
-const intervalsKey = 'verse_reminder_intervals';
+const urlKey = 'outlook_calendar_url';
+const intervalsKey = 'outlook_reminder_intervals';
+const eventsKey = 'outlook_reminder_events';
 const input = document.getElementById('target_url');
 const button = document.getElementById('submit');
 const list = document.getElementById('list');
@@ -53,7 +54,7 @@ button.onclick = () => {
 
   // Save
   chrome.storage.sync.set({
-    [urlKey]: input.value?.replace(/https?:\/\//, ''),
+    [urlKey]: /https:\/\/[^\/]+/g.exec(input.value)?.[0],
     [intervalsKey]: JSON.stringify(intervals),
   }, function () {
     button.style.backgroundColor = '#70BB66';
@@ -68,14 +69,37 @@ button.onclick = () => {
 }
 
 // Event list
-chrome.storage.sync.get(['verse_reminder_events']).then((result) => {
-  if (list && result['verse_reminder_events']) {
-    result['verse_reminder_events']?.reverse().forEach(({ subject, when }) => {
+chrome.storage.sync.get([eventsKey]).then((result) => {
+  if (list && result[eventsKey]) {
+    const now = Date.now();
+
+    result[eventsKey]?.forEach(({ subject, preview, location, start, end }) => {
       const li = document.createElement('li');
-      li.innerText = `${subject} \n${new Date(when).toLocaleTimeString('ru-RU')}`.replace(/:\d{2}$/g, '');
-      if (Date.now() > when) {
+      const event = document.createElement('div');
+      event.className = 'list';
+
+      const subjectContainer = document.createElement('div');
+      const time = `${new Date(start).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')} - ${new Date(end).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')}`;
+      subjectContainer.innerHTML = `<b>${subject}</b> <span class="time">${time}</span>`;
+      event.appendChild(subjectContainer);
+
+      const previewContainer = document.createElement('div');
+      if (preview) {
+        previewContainer.innerText = preview.replace(/[\r\n]+/g, '\r\n');
+        previewContainer.className = 'preview';
+        event.appendChild(previewContainer);
+      }
+
+      const locationContainer = document.createElement('div');
+      if (location) {
+        locationContainer.innerText = location;
+        event.appendChild(locationContainer);
+      };
+
+      if (now > new Date(start).getTime()) {
         li.className = 'past';
       }
+      li.appendChild(event);
       list.appendChild(li);
     });
   }
