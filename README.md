@@ -2,7 +2,7 @@
 it gives you browser notifications about your meetings from the calendar for the current day
 
 ## Installation
-- clone this repository
+- clone this repository (or downloa as ZIP)
 - go to chrome://extensions/
 - enable switch "Developer mode"
 - click the button "Load unpacked"
