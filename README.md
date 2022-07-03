@@ -12,10 +12,8 @@ it gives you browser notifications about your meetings from the calendar for the
 ### this should be done once (to configure a terget page for the script):
 - click the extension icon in Chrome
 - enter the url of the calendar page
+- select some of the options in "Notify before" setting
 - click "Save"
-### this should be done every day (script parses the calendar page and schedules alerts for the current day):
+### this should be done every day
 - open your calendar
-- in case everything is working you will get an alert about created notifications
-
-
-You can change the variable _remindBeforeMinutes_ in https://github.com/mikhail-yurin/verse_reminder/blob/main/background.js to configure when you want to get alerts
+- in case everything is working you will get a notification about today's events
