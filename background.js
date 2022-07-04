@@ -57,6 +57,12 @@ const processEvents = (items = []) => {
   });
 };
 
+chrome.runtime.onMessage.addListener(({ type }) => {
+  if (type === 'keep_alive') {
+    console.log('reminder is alive');
+  }
+});
+
 chrome.storage.sync.get([urlKey], function (result) {
   const targetUrl = result[urlKey];
   if (targetUrl) {
@@ -87,9 +93,9 @@ chrome.storage.sync.get([urlKey], function (result) {
       // filters
       {
         urls: [
-          "<all_urls>",
+          '<all_urls>',
         ],
-        types: ["xmlhttprequest"]
+        types: ['xmlhttprequest']
       },
       ['requestHeaders']);
   }

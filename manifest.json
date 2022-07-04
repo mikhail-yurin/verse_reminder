@@ -8,7 +8,8 @@
     "notifications",
     "storage",
     "webRequest",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -16,6 +17,17 @@
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/owa*"
+      ],
+      "type": "module",
+      "js": [
+        "index.js"
+      ]
+    }
+  ],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
