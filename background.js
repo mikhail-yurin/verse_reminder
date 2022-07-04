@@ -109,7 +109,7 @@ chrome.alarms.onAlarm.addListener(({ name, scheduledTime }) => {
       type: 'basic',
       iconUrl: icon,
       title: interval > 0 ? `Starts in ${interval} min` : 'Starts now',
-      message: `${title} at ${new Date(parseInt(start, 10)).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')}`,
+      message: `${title} at ${new Date(start).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')}`,
     },
     () => { },
   );
