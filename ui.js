@@ -79,8 +79,8 @@ chrome.storage.sync.get([eventsKey]).then((result) => {
       event.className = 'list';
 
       const subjectContainer = document.createElement('div');
-      const time = `${new Date(start).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')} - ${new Date(end).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')}`;
-      subjectContainer.innerHTML = `<b>${subject}</b> <span class="time">${time}</span>`;
+      const timeStart = `${new Date(start).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')} - ${new Date(end).toLocaleTimeString('ru-RU').replace(/:\d{2}$/g, '')}`;
+      subjectContainer.innerHTML = `<b>${subject}</b> <span class="time">${timeStart}</span>`;
       event.appendChild(subjectContainer);
 
       const previewContainer = document.createElement('div');
@@ -96,7 +96,7 @@ chrome.storage.sync.get([eventsKey]).then((result) => {
         event.appendChild(locationContainer);
       };
 
-      if (now > new Date(start).getTime()) {
+      if (now > new Date(end).getTime()) {
         li.className = 'past';
       }
       li.appendChild(event);
