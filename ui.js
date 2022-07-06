@@ -96,6 +96,9 @@ chrome.storage.sync.get([eventsKey]).then((result) => {
         event.appendChild(locationContainer);
       };
 
+      if (now > new Date(start).getTime()) {
+        li.className = 'current';
+      }
       if (now > new Date(end).getTime()) {
         li.className = 'past';
       }
