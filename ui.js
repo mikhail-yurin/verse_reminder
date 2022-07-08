@@ -6,6 +6,7 @@ const button = document.getElementById('submit');
 const list = document.getElementById('list');
 const intervalsBlock = document.getElementById('intervals');
 const availableIntervals = [0, 1, 5, 10, 15, 30, 60];
+const httpRegex = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)/;
 
 // Display interval checkboxes
 if (intervalsBlock) {
@@ -90,9 +91,18 @@ chrome.storage.sync.get([eventsKey]).then((result) => {
         event.appendChild(previewContainer);
       }
 
-      const locationContainer = document.createElement('div');
       if (location) {
-        locationContainer.innerText = location;
+        const locationContainer = document.createElement('div');
+        locationContainer.className = 'links';
+        // locationContainer.innerText = location;
+        const links = httpRegex.exec(location);
+        links?.forEach((link) => {
+          const a = document.createElement('a');
+          a.href = link;
+          a.innerText = link;
+          a.target='_blank';
+          locationContainer.appendChild(a);
+        });
         event.appendChild(locationContainer);
       };
 
